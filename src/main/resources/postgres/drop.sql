@@ -18,4 +18,4 @@
 
 -- https://www.postgresql.org/docs/devel/app-psql.html
 -- https://www.postgresql.org/docs/current/sql-dropschema.html
-DROP SCHEMA IF EXISTS kunde CASCADE;
+DROP SCHEMA IF EXISTS bestellung CASCADE;
