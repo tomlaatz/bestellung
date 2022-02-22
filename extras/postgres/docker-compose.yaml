@@ -32,13 +32,13 @@ services:
         target: 5432
     volumes:
       - type: bind
-        source: C:/Zimmermann/volumes/postgres/data
+        source: C:/Zimmermann/volumes/postgres/data2
         target: /var/lib/postgresql/data
       - type: bind
         source: C:/Zimmermann/volumes/postgres/postgresql.conf
         target: /etc/postgresql/postgresql.conf
       - type: bind
-        source: C:/Zimmermann/volumes/postgres/scripts
+        source: C:/Zimmermann/volumes/postgres/scripts2
         target: /scripts
     env_file:
       - postgres.env

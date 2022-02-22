@@ -14,12 +14,10 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -- docker compose exec postgres bash
--- psql --dbname=postgres --username=postgres --file=/scripts/create-db-kunde.sql
+-- psql --dbname=postgres --username=postgres --file=/scripts/drop-db-bestellung.sql
 
--- https://www.postgresql.org/docs/14/sql-createrole.html
-CREATE ROLE bestellung LOGIN PASSWORD 'p';
+-- https://www.postgresql.org/docs/14/sql-dropdatabase.html
+DROP DATABASE IF EXISTS bestellung;
 
--- https://www.postgresql.org/docs/14/sql-createdatabase.html
-CREATE DATABASE bestellung;
-
-GRANT ALL ON DATABASE bestellung TO bestellung;
+-- https://www.postgresql.org/docs/14/sql-droprole.html
+DROP ROLE IF EXISTS bestellung;
