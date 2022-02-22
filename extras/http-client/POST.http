@@ -1,0 +1,24 @@
+// Eine neue Bestellung anlegen
+POST {{baseUrl}}/api
+Content-Type: application/json
+Authorization: Basic {{userAdmin}} {{password}}
+
+< data/bestellung-neu.json
+
+###
+
+// Eine leere Bestellung auf englisch (= default) anlegen
+POST {{baseUrl}}/api
+Content-Type: application/json
+Authorization: Basic {{userAdmin}} {{password}}
+
+< data/bestellung-neu-leer.json
+
+###
+
+// Eine ungueltige Bestellung anlegen
+POST {{baseUrl}}/api
+Content-Type: application/json
+Authorization: Basic {{userAdmin}} {{password}}
+
+< data/bestellung-neu-invalid.json

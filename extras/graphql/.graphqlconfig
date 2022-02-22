@@ -1,0 +1,26 @@
+{
+  "name": "Kunde Schema",
+  "schemaPath": "../../src/main/resources/graphql/schema.graphqls",
+  "extensions": {
+    "endpoints": {
+      "HTTP-8080": {
+        "url": "http://localhost:8080/graphql",
+        "headers": {
+          "Accept-Language": "de",
+          "Authorization": "Basic YWRtaW46cA==",
+          "User-Agent": "JS GraphQL"
+        },
+        "introspect": true
+      },
+      "HTTP-8081": {
+        "url": "http://localhost:8081/graphql",
+        "headers": {
+          "Accept-Language": "de",
+          "Authorization": "Basic YWRtaW46cA==",
+          "User-Agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  bestellung(id: "10000000-0000-0000-0000-000000000001") {
+    version
+    datum
+    kundeId
+    kundeNachname
+    bestellpositionen {
+      artikelId
+      einzelpreis
+      anzahl
+    }
+  }
+}

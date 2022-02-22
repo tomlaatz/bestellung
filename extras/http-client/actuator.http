@@ -1,0 +1,33 @@
+// Uebersicht
+GET {{baseUrl}}/actuator
+Authorization: Basic {{userAdmin}} {{password}}
+
+###
+
+// Spring Beans
+GET {{baseUrl}}/actuator/beans
+Authorization: Basic {{userAdmin}} {{password}}
+
+###
+
+// Liveness
+GET {{baseUrl}}/actuator/health/liveness
+
+###
+
+// Readiness
+GET {{baseUrl}}/actuator/health/readiness
+
+###
+
+// Health
+GET {{baseUrl}}/actuator/health
+
+###
+
+// Info zum Start der Spring-Anwendung
+// https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/#startup
+// curl 'https://localhost:8080/actuator/startup' --include --user admin:p --insecure --request POST
+POST {{baseUrl}}/actuator/startup
+Accept: application/json
+Authorization: Basic {{userAdmin}} {{password}}

@@ -1,0 +1,184 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# https://docs.gradle.org/7.0/userguide/platforms.html#sub:central-declaration-of-dependencies
+# https://toml.io   TOML = Tom's Obvious Minimal Language
+
+# table = Schluessel/Wert-Paare
+[versions]
+kotlin = "1.6.20-M1"
+javaVersion = "17"
+
+# Hibernate Reactive -> Hibernate 5 -> Jakarta EE 8 (JPA) mit Namespace javax
+#springBoot = "3.0.0-M1"
+springBoot = "2.7.0-M1"
+
+annotations = "23.0.0"
+bouncycastle = "1.70"
+#graphqlJava = "17.3"
+graphqlJavaDataloader = "3.1.2"
+#hibernate = "6.0.0.CR1"
+#hibernate = "5.6.5.Final"
+hibernateReactive = "1.1.3.Final"
+jansi = "2.4.0"
+mutiny = "1.3.1"
+scramClient = "2.1"
+#springdocOpenapi = "2.0.0-M1"
+springdocOpenapi = "1.6.6"
+vertx = "4.2.5"
+yavi = "0.10.1"
+
+# BOM und ueberschreiben
+allureBom = "2.17.2"
+#jackson = "2.13.1"
+#junit = "5.8.2"
+#kotlinCoroutines = "1.6.0"
+#logback = "1.2.10"
+# org.springframework.boot:spring-boot-starter-logging
+#log4j2 = "2.17.1"
+netty = "4.1.74.Final"
+reactor = "2020.0.16"
+slf4j = "1.7.36"
+#spring = "6.0.0-M2"
+#spring = "5.3.15"
+#springGraphQL = "1.0.0-M5"
+# "Spring for GraphQL" ist noch nicht in Spring Boot 3 integriert
+#springGraphQL = "1.0.0-M4"
+#springHateoas = "2.0.0-M1"
+#springHateoas = "1.5.0-M1"
+#springSecurity = "6.0.0-M1"
+#springSecurity = "5.7.0-M1"
+#tomcat = "10.1.0-M10"
+#tomcat = "9.0.58"
+
+# Testen
+junitPlatformSuite = "1.8.2"
+kotest = "5.1.0"
+mockk = "1.12.2"
+
+# QS, Reports, Dokumentation
+ktlint = "0.44.0"
+ktlintKotlin = "1.6.20-M1"
+jacoco = "0.8.8-SNAPSHOT"
+#jacoco = "0.8.7"
+allure = "2.17.2"
+allureCommandline = "2.17.2"
+allureJunit = "2.17.2"
+aspectjweaver = "1.9.8.M1"
+asciidoctorj = "2.5.3"
+asciidoctorjDiagram = "2.2.1"
+asciidoctorjPdf = "1.6.2"
+dokka = "1.6.10"
+
+# Plugins
+kotlinPlugin = "1.6.20-M1"
+#kotlinPlugin = "1.6.10"
+#springAot = "0.11.0-RC1"
+testLogger = "3.1.0"
+allurePlugin = "2.9.6"
+sweeney = "4.5.0"
+detekt = "1.19.0"
+jib = "3.2.0"
+owaspDependencycheck = "6.5.3"
+snyk = "0.4"
+asciidoctor = "3.3.2"
+nwillc = "3.0.5"
+benManes = "0.42.0"
+licenseReport = "2.1"
+
+[libraries]
+kotlinBom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
+#coroutinesBom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinCoroutines" }
+nettyBom = { module = "io.netty:netty-bom", version.ref = "netty" }
+reactorBom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor" }
+#jacksonBom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jackson" }
+slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+slf4jJul = { module = "org.slf4j:jul-to-slf4j", version.ref = "slf4j" }
+#springBom = { module = "org.springframework:spring-framework-bom", version.ref = "spring" }
+#springGraphQL = { module = "org.springframework.experimental:graphql-spring-boot-starter", version.ref = "springGraphQL" }
+#springHateoas = { module = "org.springframework.hateoas:spring-hateoas", version.ref = "springHateoas" }
+#springSecurityBom = { module = "org.springframework.security:spring-security-bom", version.ref = "springSecurity" }
+allureBom = { module = "io.qameta.allure:allure-bom", version.ref = "allureBom" }
+#junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
+mutinyBom = { module = "io.smallrye.reactive:mutiny-bom", version.ref = "mutiny" }
+springBootBom = { module = "org.springframework.boot:spring-boot-starter-parent", version.ref = "springBoot" }
+springdocOpenapiBom = { module = "org.springdoc:springdoc-openapi", version.ref = "springdocOpenapi" }
+vertxBom = { module = "io.vertx:vertx-dependencies", version.ref = "vertx" }
+
+#graphqlJava = { module = "com.graphql-java:graphql-java", version.ref = "graphqlJava" }
+graphqlJavaDataloader = { module = "com.graphql-java:java-dataloader", version.ref = "graphqlJavaDataloader" }
+#logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+#log4jApi = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j2" }
+#log4j2Slf4j = { module = "org.apache.logging.log4j:log4j-to-slf4j", version.ref = "log4j2" }
+#tomcatCore = { module = "org.apache.tomcat.embed:tomcat-embed-core", version.ref = "tomcat" }
+#tomcatEl = { module = "org.apache.tomcat.embed:tomcat-embed-el", version.ref = "tomcat" }
+#springSecurityRsa = { module = "org.springframework.security:spring-security-rsa", version.ref = "springSecurityRsa" }
+
+annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
+bouncycastle = { module = "org.bouncycastle:bcprov-jdk15on", version.ref = "bouncycastle" }
+#hibernateCore = { module = "org.hibernate:hibernate-core", version.ref = "hibernate" }
+# CAVEAT: org.hibernate:hibernate-jpamodelgen erfordert kapt (deprecated!), das aber das IR Backend des Kotlin-Compilers (ab 1.6.0) deaktiviert
+# TODO https://github.com/hibernate/hibernate-reactive/issues/1052
+hibernateReactive = { module = "org.hibernate.reactive:hibernate-reactive-core", version.ref = "hibernateReactive" }
+mutinyKotlin = { module = "io.smallrye.reactive:mutiny-kotlin", version.ref = "mutiny" }
+mutinyReactor = { module = "io.smallrye.reactive:mutiny-reactor", version.ref = "mutiny" }
+scramClient = { module = "com.ongres.scram:client", version.ref = "scramClient" }
+#springdocOpenapi = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "springdocOpenapi" }
+yavi = { module = "am.ik.yavi:yavi", version.ref = "yavi" }
+
+devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springBoot" }
+jansi = { module = "org.fusesource.jansi:jansi", version.ref = "jansi" }
+
+junitPlatformSuiteApi = { module = "org.junit.platform:junit-platform-suite-api", version.ref = "junitPlatformSuite" }
+junitPlatformSuiteEngine = { module = "org.junit.platform:junit-platform-suite-engine", version.ref = "junitPlatformSuite" }
+kotest = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotestJson = { module = "io.kotest:kotest-assertions-json", version.ref = "kotest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+
+ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
+ktlintStdlibJdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "ktlintKotlin" }
+ktlintCompiler = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "ktlintKotlin" }
+dokkaHtml = { module = "org.jetbrains.dokka:kotlin-as-java-plugin", version.ref = "dokka" }
+
+[bundles]
+#tomcat = ["tomcatCore", "tomcatEl"]
+#graphqlJavaBundle = ["graphqlJava", "graphqlJavaDataloader"]
+slf4jBundle = ["slf4jApi", "slf4jJul"]
+#log4j = ["log4jApi", "log4j2Slf4j"]
+kotestBundle = ["kotest", "kotestJson"]
+ktlint = ["ktlint", "ktlintStdlibJdk8", "ktlintCompiler"]
+
+[plugins]
+# org.jetbrains.kotlin:kotlin-gradle-plugin
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinPlugin" }
+kotlinSpring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlinPlugin" }
+kotlinAllopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlinPlugin" }
+kotlinNoarg = { id = "org.jetbrains.kotlin.plugin.noarg", version.ref = "kotlinPlugin" }
+kotlinJpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlinPlugin" }
+springBoot = { id = "org.springframework.boot", version.ref = "springBoot" }
+testLogger = { id = "com.adarshr.test-logger", version.ref = "testLogger" }
+allure = { id = "io.qameta.allure", version.ref = "allurePlugin" }
+sweeney = { id = "com.fizzpod.sweeney", version.ref = "sweeney" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+jib = { id = "com.google.cloud.tools.jib", version.ref = "jib" }
+owaspDependencycheck = { id = "org.owasp.dependencycheck", version.ref = "owaspDependencycheck" }
+snyk = { id = "io.snyk.gradle.plugin.snykplugin", version.ref = "snyk" }
+asciidoctor = { id = "org.asciidoctor.jvm.convert", version.ref = "asciidoctor" }
+asciidoctorPdf = { id = "org.asciidoctor.jvm.pdf", version.ref = "asciidoctor" }
+nwillc = { id = "com.github.nwillc.vplugin", version.ref = "nwillc" }
+benManes = { id = "com.github.ben-manes.versions", version.ref = "benManes" }
+licenseReport = { id = "com.github.jk1.dependency-license-report", version.ref = "licenseReport" }
