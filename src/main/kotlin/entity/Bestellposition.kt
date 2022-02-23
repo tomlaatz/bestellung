@@ -16,8 +16,13 @@
  */
 package com.acme.bestellung.entity
 
+import net.minidev.json.annotate.JsonIgnore
 import java.math.BigDecimal
 import java.util.UUID
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.Table
 
 /**
  * Unveränderliche Daten einer Bestellungposition.
@@ -28,7 +33,21 @@ import java.util.UUID
  * @property einzelpreis Einzelpreis.
  * @property anzahl Anzahl des bestellten Artikels.a
  */
-data class Bestellposition(val artikelId: ArtikelId, val einzelpreis: BigDecimal, val anzahl: Int = 1)
+@Entity
+@Table(name = "bestellposition")
+data class Bestellposition(
+
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    val id: UUID? = null,
+
+    val artikelId: ArtikelId? = null,
+
+    val einzelpreis: BigDecimal = BigDecimal("0"),
+
+    val anzahl: Int = 1
+)
 
 /**
  * Datentyp für die IDs von Artikel-Objekten
