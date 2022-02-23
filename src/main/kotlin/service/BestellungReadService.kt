@@ -19,8 +19,11 @@ package com.acme.bestellung.service
 import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.BestellungId
 import com.acme.bestellung.entity.KundeId
+import io.smallrye.mutiny.coroutines.awaitSuspending
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withTimeout
+import org.hibernate.reactive.mutiny.Mutiny
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
 import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations
@@ -39,46 +42,39 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
  * @author [Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
  */
 @Service
-class BestellungService(
-    private val validator: BestellungValidator,
-    private val mongo: ReactiveFluentMongoOperations,
-    // siehe org.springframework.web.reactive.function.client.DefaultWebClientBuilder
-    // siehe org.springframework.web.reactive.function.client.DefaultWebClient
-    @Lazy private val kundeClient: KundeClient,
+class BestellungReadService(
+    private val factory: Mutiny.SessionFactory,
 ) {
-    private val logger = LoggerFactory.getLogger(BestellungService::class.java)
+    private val logger = LoggerFactory.getLogger(BestellungReadService::class.java)
 
     /**
      * Alle Bestellungen ermitteln.
      * @return Alle Bestellungen.
      */
-    suspend fun findAll(): Flow<Bestellung> = mongo.query<Bestellung>()
-        .flow()
-        .onEach { bestellung ->
-            logger.debug("findAll: {}", bestellung)
-            val (nachname) = findKundeById(bestellung.kundeId)
-            bestellung.kundeNachname = nachname
-        }
+    suspend fun findAll(): List<Bestellung> {
+
+
+
+    }
+
 
     /**
      * Eine Bestellung anhand der ID suchen.
      * @param id Die Id der gesuchten Bestellung.
      * @return Die gefundene Bestellung oder null.
      */
-    suspend fun findById(id: BestellungId): FindByIdResult {
+    suspend fun findById(id: BestellungId): Bestellung? {
         logger.debug("findById: id={}", id)
-        val bestellung = mongo.query<Bestellung>()
-            .matching(Bestellung::id isEqualTo id)
-            .awaitOneOrNull()
-        logger.debug("findById: {}", bestellung)
-        if (bestellung == null) {
-            return FindByIdResult.NotFound
-        }
 
-        // Destructuring
-        val (nachname) = findKundeById(bestellung.kundeId)
-        return FindByIdResult.Success(bestellung.apply { kundeNachname = nachname })
+        val bestellung = withTimeout(timeoutShort) {
+            factory.withSession { session ->
+                session.find<Bestellung>(id)
+            }.awaitSuspending()
+        }
+        logger.debug("findById: {}", bestellung)
+        return bestellung
     }
+
 
     /**
      * Bestellungen zur Kunde-ID suchen.
@@ -131,5 +127,10 @@ class BestellungService(
 
         val neueBestellung = mongo.insert<Bestellung>().oneAndAwait(bestellung)
         return CreateResult.Success(neueBestellung)
+    }
+
+    private companion object {
+        const val timeoutShort = 500L
+        const val timeoutLong = 2000L
     }
 }
