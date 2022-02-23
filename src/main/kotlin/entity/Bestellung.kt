@@ -16,14 +16,21 @@
  */
 package com.acme.bestellung.entity
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.annotation.Transient
-import org.springframework.data.annotation.Version
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDate
-import java.time.LocalDate.now
 import java.time.LocalDateTime
+import java.time.LocalDateTime.now
 import java.util.UUID
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.NamedQuery
+import javax.persistence.OneToMany
+import javax.persistence.Table
+import javax.persistence.Version
 
 /**
  * Unveränderliche Daten einer Bestellung. In DDD ist Bestellung ist ein _Aggregate Root_.
@@ -36,24 +43,35 @@ import java.util.UUID
  * @property kundeId ID des zugehörigen Kunden.
  * @property bestellpositionen Liste von [Bestellposition]
  */
-@Suppress("UnusedPrivateMember")
+
+
+
+
+@Entity
+@Table(name = "bestellung")
+@Suppress("DataClassShouldBeImmutable")
 data class Bestellung(
+    @Id
+    @GeneratedValue
     val id: BestellungId? = null,
 
     @Version
-    val version: Int? = null,
+    val version: Int = 0,
 
-    val datum: LocalDate = now(),
+    var datum: LocalDate?,
 
-    val kundeId: KundeId,
+    var kundeId: KundeId? = null,
 
-    val bestellpositionen: List<Bestellposition> = emptyList(),
+    @OneToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE])
+    val bestellpositionen: Set<Bestellposition>,
 
-    @CreatedDate
-    private val erzeugt: LocalDateTime? = null,
+    @CreationTimestamp
+    @Suppress("UnusedPrivateMember")
+    private val erzeugt: LocalDateTime = LocalDateTime.now(),
 
-    @LastModifiedDate
-    private val aktualisiert: LocalDateTime? = null,
+    @UpdateTimestamp
+    @Suppress("UnusedPrivateMember")
+    private val aktualisiert: LocalDateTime = now(),
 ) {
     /**
      * @property kundeNachname Nachname des Kunden. Der Nachname wird nicht in der DB gespeichert und ist nicht
