@@ -32,13 +32,13 @@ services:
         target: 5432
     volumes:
       - type: bind
-        source: C:/Zimmermann/volumes/postgres/data2
+        source: C:/Zimmermann/volumes/postgres/data
         target: /var/lib/postgresql/data
       - type: bind
         source: C:/Zimmermann/volumes/postgres/postgresql.conf
         target: /etc/postgresql/postgresql.conf
       - type: bind
-        source: C:/Zimmermann/volumes/postgres/scripts2
+        source: C:/Zimmermann/volumes/postgres/scripts
         target: /scripts
     env_file:
       - postgres.env
@@ -76,6 +76,7 @@ services:
         limits:
           cpus: "0.5"
           memory: 768M
+
   # "Adminer" als Alternative zu pgadmin
   #adminer:
   #  image: adminer:4.8.1
