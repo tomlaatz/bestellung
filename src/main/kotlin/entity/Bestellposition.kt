@@ -19,9 +19,14 @@ package com.acme.bestellung.entity
 import net.minidev.json.annotate.JsonIgnore
 import java.math.BigDecimal
 import java.util.UUID
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import javax.persistence.OneToOne
 import javax.persistence.Table
 
 /**
@@ -46,7 +51,11 @@ data class Bestellposition(
 
     val einzelpreis: BigDecimal = BigDecimal("0"),
 
-    val anzahl: Int = 1
+    val anzahl: Int = 1,
+
+    @ManyToOne(optional = false, cascade = [CascadeType.PERSIST, CascadeType.REMOVE])
+    @JoinColumn(name = "bestellung_fk", unique = true, nullable = false, updatable = false)
+    val bestellung: Bestellung,
 )
 
 /**
