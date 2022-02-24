@@ -52,6 +52,12 @@ import javax.persistence.Version
 
 @Entity
 @Table(name = "bestellung")
+@NamedQuery(
+    name = Bestellung.BY_KUNDEID,
+    query = "SELECT b " +
+        "FROM  Bestellung b " +
+        "WHERE b.kundeId = :${Bestellung.PARAM_KUNDEID}",
+)
 @Suppress("DataClassShouldBeImmutable")
 data class Bestellung(
     @Id
@@ -108,7 +114,23 @@ data class Bestellung(
      * @return Der Hashwert.
      */
     override fun hashCode() = id?.hashCode() ?: this::class.hashCode()
-}
+
+    companion object {
+        private const val PREFIX = "Bestellung."
+
+        /**
+         * Name für die Named Query, mit der Bestellungen anhand der KundenID gesucht werden
+         */
+        const val BY_KUNDEID = "${PREFIX}byKundeId"
+
+        /**
+        * Parametername für die KundenId
+        */
+        const val PARAM_KUNDEID = "kundeId"
+
+        }
+
+    }
 
 /**
  * Datentyp für die IDs von Bestellung-Objekten

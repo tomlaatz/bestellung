@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Lazy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withTimeout
+import org.hibernate.Hibernate
 import org.hibernate.reactive.mutiny.Mutiny.SessionFactory
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
@@ -84,17 +85,20 @@ class BestellungReadService(
      * @param kundeId Die Id des gegebenen Kunden.
      * @return Die gefundenen Bestellungen oder ein leeres Flux-Objekt.
      */
-    suspend fun findByKundeId(kundeId: KundeId): Flow<Bestellung> {
+    suspend fun findByKundeId(kundeId: KundeId): List<Bestellung>? = try {
         val (nachname) = findKundeById(kundeId)
 
-        return mongo.query<Bestellung>()
-            .matching(Bestellung::kundeId isEqualTo kundeId)
-            .flow()
-            .onEach { bestellung ->
-                logger.debug("findByKundeId: {}", bestellung)
-                bestellung.kundeNachname = nachname
-                logger.debug("findByKundeId: kundeNachname={}", bestellung.kundeNachname)
-            }
+        factory.withSession { session ->
+            session.createNamedQuery<Bestellung>(Bestellung.BY_KUNDEID)
+                .setParameter(Bestellung.PARAM_KUNDEID, kundeId.toString())
+                .resultList
+        }.awaitSuspending().onEach { bestellung ->
+            logger.debug("findByKundeId: {}", bestellung)
+            bestellung.kundeNachname = nachname
+            logger.debug("findByKundeId: kundeNachname={}", bestellung.kundeNachname) }
+    } catch (e: NoResultException) {
+        logger.debug("Keine Bestellung mit der KundenId '{}'", kundeId)
+        null
     }
 
     private suspend fun findKundeById(kundeId: KundeId): Kunde {
@@ -114,22 +118,6 @@ class BestellungReadService(
                 }
             }
         }
-    }
-
-    /**
-     * Eine neue Bestellung anlegen.
-     * @param bestellung Das Objekt der neu anzulegenden Bestellung.
-     * @return Die neu angelegte Bestellung mit generierter ID.
-     */
-    suspend fun create(bestellung: Bestellung): CreateResult {
-        logger.debug("create: {}", bestellung)
-        val violations = validator.validate(bestellung)
-        if (violations.isNotEmpty()) {
-            return CreateResult.ConstraintViolations(violations)
-        }
-
-        val neueBestellung = mongo.insert<Bestellung>().oneAndAwait(bestellung)
-        return CreateResult.Success(neueBestellung)
     }
 
     private companion object {
