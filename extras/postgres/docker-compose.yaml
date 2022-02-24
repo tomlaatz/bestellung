@@ -76,6 +76,7 @@ services:
         limits:
           cpus: "0.5"
           memory: 768M
+
   # "Adminer" als Alternative zu pgadmin
   #adminer:
   #  image: adminer:4.8.1
