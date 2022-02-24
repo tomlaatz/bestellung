@@ -21,7 +21,7 @@ import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.BestellungId
 import com.acme.bestellung.entity.KundeId
 import com.acme.bestellung.rest.BestellungController.Companion.API_PATH
-import com.acme.bestellung.service.BestellungService
+import com.acme.bestellung.service.BestellungReadService
 import com.acme.bestellung.service.CreateResult
 import com.acme.bestellung.service.FindByIdResult
 import io.swagger.v3.oas.annotations.Operation
@@ -61,15 +61,15 @@ import java.net.URI
  *
  * @author [Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
  *
- * @constructor Einen BestellungController mit einem injizierten [BestellungService] erzeugen.
+ * @constructor Einen BestellungController mit einem injizierten [BestellungReadService] erzeugen.
  *
- * @property service Injiziertes Objekt von [BestellungService]
+ * @property service Injiziertes Objekt von [BestellungReadService]
  */
 @RestController
 @RequestMapping(API_PATH)
 @Tag(name = "Bestellungen API")
 @Suppress("RegExpUnexpectedAnchor")
-class BestellungController(private val service: BestellungService) {
+class BestellungController(private val service: BestellungReadService) {
     private val logger = LoggerFactory.getLogger(BestellungController::class.java)
 
     /**

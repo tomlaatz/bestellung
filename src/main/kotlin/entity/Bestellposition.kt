@@ -21,6 +21,7 @@ import java.math.BigDecimal
 import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.JoinColumn
@@ -53,9 +54,7 @@ data class Bestellposition(
 
     val anzahl: Int = 1,
 
-    @ManyToOne(optional = false, cascade = [CascadeType.PERSIST, CascadeType.REMOVE])
-    @JoinColumn(name = "bestellung_fk", unique = true, nullable = false, updatable = false)
-    val bestellung: Bestellung,
+    val idx: Int = 0
 )
 
 /**

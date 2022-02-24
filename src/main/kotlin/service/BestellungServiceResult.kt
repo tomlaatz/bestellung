@@ -20,7 +20,7 @@ import am.ik.yavi.core.ConstraintViolation
 import com.acme.bestellung.entity.Bestellung
 
 /**
- * Resultat-Typ für [BestellungService.findById]
+ * Resultat-Typ für [BestellungReadService.findById]
  */
 sealed interface FindByIdResult {
     /**
@@ -36,7 +36,7 @@ sealed interface FindByIdResult {
 }
 
 /**
- * Resultat-Typ für [BestellungService.create]
+ * Resultat-Typ für [BestellungReadService.create]
  */
 sealed interface CreateResult {
     /**

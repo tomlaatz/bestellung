@@ -18,7 +18,7 @@ package com.acme.bestellung.graphql
 
 import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.BestellungId
-import com.acme.bestellung.service.BestellungService
+import com.acme.bestellung.service.BestellungReadService
 import com.acme.bestellung.service.FindByIdResult
 import org.slf4j.LoggerFactory
 import org.springframework.graphql.data.method.annotation.Argument
@@ -30,13 +30,13 @@ import org.springframework.stereotype.Controller
  *
  * @author [Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
  *
- * @constructor Einen BestellungGraphQlController mit einem injizierten [BestellungService] erzeugen.
+ * @constructor Einen BestellungGraphQlController mit einem injizierten [BestellungReadService] erzeugen.
  *
- * @property service Injiziertes Objekt von [BestellungService]
+ * @property service Injiziertes Objekt von [BestellungReadService]
  */
 @Controller
 @Suppress("unused")
-class BestellungGraphQlController(val service: BestellungService) {
+class BestellungGraphQlController(val service: BestellungReadService) {
     private val logger = LoggerFactory.getLogger(BestellungGraphQlController::class.java)
 
     /**
