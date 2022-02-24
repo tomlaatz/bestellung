@@ -23,12 +23,15 @@ import java.time.LocalDateTime
 import java.time.LocalDateTime.now
 import java.util.UUID
 import javax.persistence.CascadeType
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.NamedQuery
 import javax.persistence.OneToMany
+import javax.persistence.OrderColumn
 import javax.persistence.Table
 import javax.persistence.Version
 
@@ -62,8 +65,13 @@ data class Bestellung(
 
     var kundeId: KundeId? = null,
 
-    @OneToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE])
-    val bestellpositionen: Set<Bestellposition>,
+    @OneToMany(
+        cascade = [CascadeType.PERSIST, CascadeType.REMOVE],
+        fetch = FetchType.EAGER,
+    )
+    @JoinColumn(name = "bestellung_fk", nullable = false)
+    @OrderColumn(name = "idx")
+    var bestellpositionen: List<Bestellposition>,
 
     @CreationTimestamp
     @Suppress("UnusedPrivateMember")

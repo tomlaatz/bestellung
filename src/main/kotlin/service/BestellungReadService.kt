@@ -20,21 +20,17 @@ import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.BestellungId
 import com.acme.bestellung.entity.KundeId
 import io.smallrye.mutiny.coroutines.awaitSuspending
+import kotlinx.coroutines.reactor.awaitSingleOrNull
+import org.springframework.context.annotation.Lazy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withTimeout
-import org.hibernate.reactive.mutiny.Mutiny
+import org.hibernate.reactive.mutiny.Mutiny.SessionFactory
 import org.slf4j.LoggerFactory
-import org.springframework.context.annotation.Lazy
-import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations
-import org.springframework.data.mongodb.core.awaitOneOrNull
-import org.springframework.data.mongodb.core.flow
-import org.springframework.data.mongodb.core.insert
-import org.springframework.data.mongodb.core.oneAndAwait
-import org.springframework.data.mongodb.core.query
-import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.stereotype.Service
+import org.springframework.util.MultiValueMap
 import org.springframework.web.reactive.function.client.WebClientResponseException
+import javax.persistence.NoResultException
 
 /**
  * Anwendungslogik für Bestellungen.
@@ -43,7 +39,9 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
  */
 @Service
 class BestellungReadService(
-    private val factory: Mutiny.SessionFactory,
+    private val validator: BestellungValidator,
+    private val factory: SessionFactory,
+    @Lazy private val kundeClient: KundeClient,
 ) {
     private val logger = LoggerFactory.getLogger(BestellungReadService::class.java)
 
@@ -52,9 +50,14 @@ class BestellungReadService(
      * @return Alle Bestellungen.
      */
     suspend fun findAll(): List<Bestellung> {
+        val query = factory.criteriaBuilder.createQuery<Bestellung>()
+        query.from(Bestellung::class)
 
-
-
+        return withTimeout(timeoutLong) {
+            factory.withSession { session ->
+                session.createQuery(query).resultList
+            }.awaitSuspending()
+        }
     }
 
 
