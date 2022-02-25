@@ -21,8 +21,8 @@ import com.acme.bestellung.entity.ArtikelId
 import com.acme.bestellung.entity.Bestellposition
 import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.KundeId
-import com.acme.bestellung.rest.BestellungController.Companion.API_PATH
-import com.acme.bestellung.rest.BestellungController.Companion.ID_PATTERN
+import com.acme.bestellung.rest.BestellungGetController.Companion.API_PATH
+import com.acme.bestellung.rest.BestellungGetController.Companion.ID_PATTERN
 import com.jayway.jsonpath.JsonPath
 import io.kotest.assertions.assertSoftly
 import io.kotest.matchers.collections.beEmpty
@@ -82,7 +82,7 @@ class BestellungRestTest(@LocalServerPort private val port: Int, ctx: Applicatio
         .build()
 
     init {
-        ctx.getBean<BestellungController>() shouldNotBe null
+        ctx.getBean<BestellungGetController>() shouldNotBe null
     }
 
     // -------------------------------------------------------------------------

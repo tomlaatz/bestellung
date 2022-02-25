@@ -38,9 +38,9 @@ import java.time.LocalDate
 @Relation(collectionRelation = "bestellungen", itemRelation = "bestellung")
 @JsonPropertyOrder("datum", "kundeId", "kundeNachname", "bestellpositionen")
 data class BestellungModel(
-    val datum: LocalDate = LocalDate.now(),
+    val datum: LocalDate? = LocalDate.now(),
 
-    val kundeId: KundeId,
+    val kundeId: KundeId?,
 
     val kundeNachname: String,
 

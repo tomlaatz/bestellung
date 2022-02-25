@@ -20,7 +20,7 @@ import am.ik.yavi.core.ConstraintViolation
 import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.BestellungId
 import com.acme.bestellung.entity.KundeId
-import com.acme.bestellung.rest.BestellungController.Companion.API_PATH
+import com.acme.bestellung.rest.BestellungGetController.Companion.API_PATH
 import com.acme.bestellung.service.BestellungReadService
 import com.acme.bestellung.service.CreateResult
 import com.acme.bestellung.service.FindByIdResult
@@ -28,8 +28,6 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
 import org.slf4j.LoggerFactory
 import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.Link
@@ -69,8 +67,8 @@ import java.net.URI
 @RequestMapping(API_PATH)
 @Tag(name = "Bestellungen API")
 @Suppress("RegExpUnexpectedAnchor")
-class BestellungController(private val service: BestellungReadService) {
-    private val logger = LoggerFactory.getLogger(BestellungController::class.java)
+class BestellungGetController(private val service: BestellungReadService) {
+    private val logger = LoggerFactory.getLogger(BestellungGetController::class.java)
 
     /**
      * Suche anhand der Bestellung-ID
@@ -83,7 +81,9 @@ class BestellungController(private val service: BestellungReadService) {
     @Operation(summary = "Suche mit der Bestellung-ID", tags = ["Suchen"])
     @ApiResponses(
         ApiResponse(responseCode = "200", description = "Bestellung gefunden"),
+        ApiResponse(responseCode = "304", description = "Bestellung unverändert"),
         ApiResponse(responseCode = "404", description = "Bestellung nicht gefunden"),
+        ApiResponse(responseCode = "406", description = "Falsche Versionsnummer im ETag"),
     )
     suspend fun findById(
         @PathVariable id: BestellungId,

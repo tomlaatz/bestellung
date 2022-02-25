@@ -18,6 +18,7 @@ package com.acme.bestellung.service
 
 import am.ik.yavi.core.ConstraintViolation
 import com.acme.bestellung.entity.Bestellung
+import com.acme.bestellung.entity.BestellungId
 
 /**
  * Resultat-Typ für [BestellungReadService.findById]
@@ -32,7 +33,7 @@ sealed interface FindByIdResult {
     /**
      * Resultat-Typ, wenn keine Bestellung gefunden wurde.
      */
-    object NotFound : FindByIdResult
+    data class NotFound(val id: BestellungId) : FindByIdResult
 }
 
 /**

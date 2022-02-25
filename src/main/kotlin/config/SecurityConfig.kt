@@ -16,7 +16,7 @@
  */
 package com.acme.bestellung.config
 
-import com.acme.bestellung.rest.BestellungController.Companion.API_PATH
+import com.acme.bestellung.rest.BestellungGetController.Companion.API_PATH
 import com.acme.bestellung.security.Rolle.actuator
 import com.acme.bestellung.security.Rolle.admin
 import com.acme.bestellung.security.Rolle.kunde

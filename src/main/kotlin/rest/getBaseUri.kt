@@ -17,7 +17,7 @@
 package com.acme.bestellung.rest
 
 import com.acme.bestellung.entity.BestellungId
-import com.acme.bestellung.rest.BestellungController.Companion.API_PATH
+import com.acme.bestellung.rest.BestellungGetController.Companion.API_PATH
 import org.springframework.http.HttpHeaders
 import java.net.URI
 

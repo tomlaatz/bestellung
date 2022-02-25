@@ -67,7 +67,7 @@ class BestellungReadService(
      * @param id Die Id der gesuchten Bestellung.
      * @return Die gefundene Bestellung oder null.
      */
-    suspend fun findById(id: BestellungId): Bestellung? {
+    suspend fun findById(id: BestellungId): FindByIdResult {
         logger.debug("findById: id={}", id)
 
         val bestellung = withTimeout(timeoutShort) {
@@ -76,7 +76,12 @@ class BestellungReadService(
             }.awaitSuspending()
         }
         logger.debug("findById: {}", bestellung)
-        return bestellung
+
+        return if (bestellung != null) {
+            FindByIdResult.Success(bestellung)
+        } else {
+            FindByIdResult.NotFound(id)
+        }
     }
 
 
