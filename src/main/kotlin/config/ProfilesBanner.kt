@@ -16,11 +16,9 @@
  */
 package com.acme.bestellung.config
 
-import com.mongodb.internal.build.MongoDriverVersion
 import org.springframework.boot.Banner
 import org.springframework.boot.SpringBootVersion
 import org.springframework.core.SpringVersion
-import org.springframework.data.mongodb.SpringDataMongoDB
 import org.springframework.security.core.SpringSecurityCoreVersion
 import java.net.InetAddress
 import java.util.Locale
@@ -64,10 +62,8 @@ object ProfilesBanner {
             |(C) Juergen Zimmermann, Hochschule Karlsruhe
             |Version              1.0
             |Spring Boot          ${SpringBootVersion.getVersion()}
-            |Spring Data MongoDB  ${SpringDataMongoDB.version()}
             |Spring Security      ${SpringSecurityCoreVersion.getVersion()}
             |Spring Framework     ${SpringVersion.getVersion()}
-            |MongoDB Treiber      ${MongoDriverVersion.VERSION}
             |Hibernate            ${org.hibernate.Version.getVersionString()}
             |Kotlin               ${KotlinVersion.CURRENT}
             |OpenJDK              $jdkVersion
