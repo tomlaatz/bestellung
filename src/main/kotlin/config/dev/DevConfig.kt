@@ -28,4 +28,4 @@ import org.springframework.context.annotation.Profile
  */
 @Configuration(proxyBeanMethods = false)
 @Profile(DEV)
-class DevConfig : DbPopulate, LogWebClientKunde, K8s
+class DevConfig : LogWebClientKunde, K8s
