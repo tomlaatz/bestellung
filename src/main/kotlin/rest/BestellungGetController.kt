@@ -163,69 +163,22 @@ class BestellungGetController(private val service: BestellungReadService) {
         }
 
         val baseUri = getBaseUri(request.headers, request.uri)
-        val modelList = mutableListOf<BestellungModel>()
-        bestellungen
-            .map { bestellung ->
+
+        val modelList = bestellungen
+            ?.map { bestellung ->
                 logger.trace("find: bestellung={}", bestellung)
                 val model = BestellungModel(bestellung)
                 val selfLink = Link.of("$baseUri/${bestellung.id}")
                 model.add(selfLink)
             }
-            .toList(modelList)
+
         logger.trace("find: modelList={}", modelList)
 
-        if (modelList.isEmpty()) {
+        if (modelList == null) {
             return notFound().build()
         }
 
         return ok(CollectionModel.of(modelList))
-    }
-
-    /**
-     * Einen neuen Bestellung-Datensatz anlegen.
-     * @param bestellungDTO Das Bestellungsobjekt aus dem eingegangenen Request-Body.
-     * @param request Das Request-Objekt, um `Location` im Response-Header zu erstellen.
-     * @return Response mit Statuscode 201 einschließlich Location-Header oder Statuscode 400 falls Constraints verletzt
-     *      sind oder der JSON-Datensatz syntaktisch nicht korrekt ist.
-     */
-    @Suppress("RegExpUnexpectedAnchor", "RegExpUnexpectedAnchor")
-    @PostMapping(consumes = [APPLICATION_JSON_VALUE])
-    @Operation(summary = "Eine neue Bestellung anlegen")
-    @ApiResponses(
-        ApiResponse(responseCode = "201", description = "Bestellung neu angelegt"),
-        ApiResponse(responseCode = "400", description = "Ungültige Werte vorhanden"),
-    )
-    suspend fun create(
-        @RequestBody bestellungDTO: BestellungDTO,
-        request: ServerHttpRequest,
-    ): ResponseEntity<GenericBody> {
-        logger.debug("create(): {}", bestellungDTO)
-
-        return when (val result = service.create(bestellungDTO.toBestellung())) {
-            is CreateResult.Success -> handleCreated(result.bestellung, request)
-            is CreateResult.ConstraintViolations -> handleConstraintViolations(result.violations)
-        }
-    }
-
-    private fun handleCreated(bestellung: Bestellung, request: ServerHttpRequest): ResponseEntity<GenericBody> {
-        logger.debug("handleCreated: {}", bestellung)
-        val baseUri = getBaseUri(request.headers, request.uri)
-        val location = URI("$baseUri/${bestellung.id}")
-        logger.debug("handleCreated: {}", location)
-        return created(location).build()
-    }
-
-    private fun handleConstraintViolations(violations: Collection<ConstraintViolation>): ResponseEntity<GenericBody> {
-        if (violations.isEmpty()) {
-            return unprocessableEntity().build()
-        }
-
-        val bestellungViolations = violations.associate { violation ->
-            violation.messageKey() to violation.message()
-        }
-        logger.debug("handleConstraintViolations(): {}", bestellungViolations)
-
-        return unprocessableEntity().body(GenericBody.Values(bestellungViolations))
     }
 
     /**
