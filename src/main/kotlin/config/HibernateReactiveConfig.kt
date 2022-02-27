@@ -40,7 +40,7 @@ interface HibernateReactiveConfig {
      * @return SessionFactory für _Hibernate Reactive_.
      */
     @Bean
-    fun sessionFactory(): Mutiny.SessionFactory = Persistence.createEntityManagerFactory("kundePU")
+    fun sessionFactory(): Mutiny.SessionFactory = Persistence.createEntityManagerFactory("bestellungPU")
         .unwrap(Mutiny.SessionFactory::class.java)
 
     /**
