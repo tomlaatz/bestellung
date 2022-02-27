@@ -17,7 +17,6 @@
 package com.acme.bestellung.config
 
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.mongodb.config.EnableMongoAuditing
 import org.springframework.hateoas.config.EnableHypermediaSupport
 import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType.HAL
 import org.springframework.hateoas.support.WebStack.WEBFLUX
@@ -29,5 +28,4 @@ import org.springframework.hateoas.support.WebStack.WEBFLUX
  */
 @Configuration(proxyBeanMethods = false)
 @EnableHypermediaSupport(type = [HAL], stacks = [WEBFLUX])
-@EnableMongoAuditing
-class AppConfig : GraphQlConfig, MongoDbConfig, SecurityConfig, WebClientBuilderConfig
+class AppConfig : GraphQlConfig, HibernateReactiveConfig, SecurityConfig
