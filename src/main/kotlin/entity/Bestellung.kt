@@ -23,7 +23,6 @@ import java.time.LocalDateTime
 import java.time.LocalDateTime.now
 import java.util.UUID
 import javax.persistence.CascadeType
-import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
@@ -76,12 +75,11 @@ data class Bestellung(
         fetch = FetchType.EAGER,
     )
     @JoinColumn(name = "bestellung_fk", nullable = false)
-    @OrderColumn(name = "idx")
-    var bestellpositionen: List<Bestellposition>,
+    var bestellpositionen: MutableList<Bestellposition>,
 
     @CreationTimestamp
     @Suppress("UnusedPrivateMember")
-    private val erzeugt: LocalDateTime = LocalDateTime.now(),
+    private val erzeugt: LocalDateTime = now(),
 
     @UpdateTimestamp
     @Suppress("UnusedPrivateMember")

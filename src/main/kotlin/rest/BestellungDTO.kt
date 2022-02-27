@@ -33,7 +33,7 @@ import java.time.LocalDate
 data class BestellungDTO(
     val kundeId: KundeId,
 
-    val bestellpositionen: List<Bestellposition>,
+    val bestellpositionen: MutableList<Bestellposition>,
 ) {
     /**
      * Konvertierung einer HATEOAS-Repräsentation in ein Objekt des Anwendungskerns

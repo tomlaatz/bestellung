@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS bestellposition (
   bestellung_fk   uuid REFERENCES bestellung,
   artikelId       uuid NOT NULL,
   einzelpreis     NUMERIC(10,2) NOT NULL,
-  anzahl          integer NOT NULL CHECK,
+  anzahl          integer NOT NULL,
   idx             integer NOT NULL DEFAULT 0
   );
 
