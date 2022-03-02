@@ -37,10 +37,11 @@ CREATE TABLE IF NOT EXISTS bestellung (
   );
 
 CREATE TABLE IF NOT EXISTS bestellposition (
-                                             id              uuid PRIMARY KEY,
-                                             bestellung_fk   uuid REFERENCES bestellung,
-                                             artikelId       uuid NOT NULL,
-                                             einzelpreis     NUMERIC(10,2) NOT NULL,
+  id              uuid PRIMARY KEY,
+  bestellung_fk   uuid REFERENCES bestellung,
+  artikelId       uuid NOT NULL,
+  einzelpreis     NUMERIC(10,2) NOT NULL,
   anzahl          integer NOT NULL,
   idx             integer NOT NULL DEFAULT 0
   );
+
