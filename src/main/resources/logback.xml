@@ -1,25 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
--->
-
-<!-- https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto.logging -->
-<!-- https://logback.qos.ch/manual/configuration.html -->
-
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
@@ -42,6 +20,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <logger name="org.springframework.security.web.server.authorization.AuthorizationWebFilter" level="${APPLICATION_LOGLEVEL:-INFO}" />
     <logger name="org.springframework.security.web.server.authorization.DelegatingReactiveAuthorizationManager" level="${APPLICATION_LOGLEVEL:-INFO}" />
     <logger name="org.springframework.web.server.adapter.HttpWebHandlerAdapter" level="${REQUEST_RESPONSE_LOGLEVEL:-DEBUG}" />
+
+    <logger name="org.hibernate.SQL" level="${APPLICATION_LOGLEVEL:-INFO}" />
+    <!-- Hibernate 6:
+    <logger name="org.hibernate.orm.jdbc.bind" level="${APPLICATION_LOGLEVEL:-INFO}" />
+    -->
+    <logger name="org.hibernate.type.descriptor.sql" level="${APPLICATION_LOGLEVEL:-INFO}" />
+    <logger name="org.hibernate.SQL_SLOW" level="INFO" />
 
     <logger name="io.mockk.impl.recording.states.AnsweringState" level="DEBUG" />
     <logger name="io.qameta.allure.AllureLifecycle" level="FATAL" />

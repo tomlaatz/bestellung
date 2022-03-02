@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2022 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,19 +16,16 @@
  */
 package com.acme.bestellung.config
 
-import com.acme.bestellung.entity.Bestellung
-import org.hibernate.reactive.mutiny.Mutiny
+import org.hibernate.reactive.mutiny.Mutiny.SessionFactory
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
-import reactor.kotlin.core.publisher.toMono
-import java.util.UUID.randomUUID
-import javax.persistence.Persistence
+import javax.persistence.Persistence.createEntityManagerFactory
 
 /**
- * Spring-Konfiguration für Enum-Konvertierungen beim Zugriff auf _MongoDB_.
+ * Spring Beans zur Initialisisierung der `SessionFactory` für _Hibernate Reactive_.
  *
- * @author Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
+ * @author [Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
  */
 interface HibernateReactiveConfig {
     /**
@@ -40,8 +37,8 @@ interface HibernateReactiveConfig {
      * @return SessionFactory für _Hibernate Reactive_.
      */
     @Bean
-    fun sessionFactory(): Mutiny.SessionFactory = Persistence.createEntityManagerFactory("bestellungPU")
-        .unwrap(Mutiny.SessionFactory::class.java)
+    fun sessionFactory(): SessionFactory = createEntityManagerFactory("bestellungPU")
+        .unwrap(SessionFactory::class.java)
 
     /**
      * Initialisierung der `SessionFactory` für _Hibernate Reactive_.
@@ -50,7 +47,7 @@ interface HibernateReactiveConfig {
      * @return CommandLineRunner mit der Protokollierung, dass die Initialisierung stattgefunden hat.
      */
     @Bean
-    fun initSessionFactory(factory: Mutiny.SessionFactory) = CommandLineRunner {
+    fun initSessionFactory(factory: SessionFactory) = CommandLineRunner {
         LoggerFactory.getLogger(HibernateReactiveConfig::class.java)
             .debug("SessionFactory wurde initialisiert")
     }
