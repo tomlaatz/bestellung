@@ -42,7 +42,7 @@ data class BestellungModel(
 
     val kundeId: KundeId?,
 
-    val kundeNachname: String,
+    val kundeNachname: String?,
 
     val bestellpositionen: List<Bestellposition>,
 ) : RepresentationModel<BestellungModel>() {

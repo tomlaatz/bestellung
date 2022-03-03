@@ -45,3 +45,4 @@ CREATE TABLE IF NOT EXISTS bestellposition (
   idx             integer NOT NULL DEFAULT 0
   );
 
+CREATE INDEX IF NOT EXISTS idx_idx ON bestellposition (idx ASC);
