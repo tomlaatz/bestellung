@@ -53,7 +53,7 @@ class BestellungReadService(
                 session.createQuery(query).resultList
             }.awaitSuspending()
         }.onEach {
-            bestellung ->
+                bestellung ->
             val (nachname) = findKundeById(bestellung.kundeId)
             bestellung.kundeNachname = nachname
         }
