@@ -29,6 +29,7 @@ import javax.persistence.Table
  *
  * @author [Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
  *
+ * @property id ID der Bestellposition
  * @property artikelId ID der bestellten Artikels.
  * @property einzelpreis Einzelpreis.
  * @property anzahl Anzahl des bestellten Artikels.a
