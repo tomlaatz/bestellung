@@ -65,7 +65,7 @@ data class Bestellung(
 
     var datum: LocalDate?,
 
-    var kundeId: KundeId? = null,
+    var kundeId: KundeId,
 
     @OneToMany(
         cascade = [CascadeType.PERSIST, CascadeType.REMOVE],

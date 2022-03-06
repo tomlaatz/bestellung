@@ -40,9 +40,9 @@ import java.time.LocalDate
 data class BestellungModel(
     val datum: LocalDate? = LocalDate.now(),
 
-    val kundeId: KundeId?,
+    val kundeId: KundeId,
 
-    val kundeNachname: String?,
+    val kundeNachname: String,
 
     val bestellpositionen: List<Bestellposition>,
 ) : RepresentationModel<BestellungModel>() {

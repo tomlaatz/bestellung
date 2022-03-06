@@ -52,6 +52,10 @@ class BestellungReadService(
             factory.withSession { session ->
                 session.createQuery(query).resultList
             }.awaitSuspending()
+        }.onEach {
+            bestellung ->
+            val (nachname) = findKundeById(bestellung.kundeId)
+            bestellung.kundeNachname = nachname
         }
     }
 
@@ -71,7 +75,8 @@ class BestellungReadService(
         logger.debug("findById: {}", bestellung)
 
         return if (bestellung != null) {
-            FindByIdResult.Success(bestellung)
+            val (nachname) = findKundeById(bestellung.kundeId)
+            FindByIdResult.Success(bestellung.apply { kundeNachname = nachname })
         } else {
             FindByIdResult.NotFound(id)
         }
