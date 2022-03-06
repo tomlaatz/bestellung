@@ -35,7 +35,6 @@ import javax.persistence.NoResultException
  */
 @Service
 class BestellungReadService(
-    private val validator: BestellungValidator,
     private val factory: SessionFactory,
     @Lazy private val kundeClient: KundeClient,
 ) {
@@ -96,7 +95,7 @@ class BestellungReadService(
             logger.debug("findByKundeId: kundeNachname={}", bestellung.kundeNachname)
         }
     } catch (e: NoResultException) {
-        logger.debug("Keine Bestellung mit der KundenId '{}'", kundeId)
+        logger.debug("Keine Bestellung mit der KundenId '{}'", kundeId, e)
         null
     }
 

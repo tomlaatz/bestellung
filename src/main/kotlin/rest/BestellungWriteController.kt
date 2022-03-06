@@ -44,9 +44,7 @@ import java.net.URI
  *
  * @author [Jürgen Zimmermann](mailto:Juergen.Zimmermann@h-ka.de)
  *
- * @constructor Einen BestellungController mit einem injizierten [BestellungReadService] erzeugen.
- *
- * @property service Injiziertes Objekt von [BestellungReadService]
+ * @constructor Einen BestellungController mit einem injizierten [BestellungWriteService] erzeugen.
  */
 @RestController
 @RequestMapping(API_PATH)
@@ -100,23 +98,5 @@ class BestellungWriteController(private val service: BestellungWriteService) {
         logger.debug("handleConstraintViolations(): {}", bestellungViolations)
 
         return unprocessableEntity().body(GenericBody.Values(bestellungViolations))
-    }
-
-    /**
-     * Konstante für die REST-Schnittstelle
-     */
-    companion object {
-        /**
-         * Basis-Pfad der REST-Schnittstelle.
-         * const: "compile time constant"
-         */
-        const val API_PATH = "/api"
-
-        private const val HEX_PATTERN = "[\\dA-Fa-f]"
-
-        /**
-         * Muster bzw. regulärer Ausdruck für eine UUID.
-         */
-        const val ID_PATTERN = "$HEX_PATTERN{8}-$HEX_PATTERN{4}-$HEX_PATTERN{4}-$HEX_PATTERN{4}-$HEX_PATTERN{12}"
     }
 }
