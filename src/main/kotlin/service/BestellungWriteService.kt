@@ -17,20 +17,12 @@
 package com.acme.bestellung.service
 
 import com.acme.bestellung.entity.Bestellung
-import com.acme.bestellung.entity.BestellungId
-import com.acme.bestellung.entity.KundeId
 import io.smallrye.mutiny.coroutines.awaitSuspending
-import kotlinx.coroutines.reactor.awaitSingleOrNull
-import org.springframework.context.annotation.Lazy
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withTimeout
 import org.hibernate.reactive.mutiny.Mutiny.SessionFactory
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
-import org.springframework.util.MultiValueMap
-import org.springframework.web.reactive.function.client.WebClientResponseException
-import javax.persistence.NoResultException
 
 /**
  * Anwendungslogik für Bestellungen.
@@ -64,7 +56,6 @@ class BestellungWriteService(
             }.awaitSuspending()
         }
 
-        //val neueBestellung = mongo.insert<Bestellung>().oneAndAwait(bestellung)
         return CreateResult.Success(bestellung)
     }
 

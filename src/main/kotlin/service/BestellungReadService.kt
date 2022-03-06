@@ -20,16 +20,11 @@ import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.BestellungId
 import com.acme.bestellung.entity.KundeId
 import io.smallrye.mutiny.coroutines.awaitSuspending
-import kotlinx.coroutines.reactor.awaitSingleOrNull
-import org.springframework.context.annotation.Lazy
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withTimeout
-import org.hibernate.Hibernate
 import org.hibernate.reactive.mutiny.Mutiny.SessionFactory
 import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
-import org.springframework.util.MultiValueMap
 import org.springframework.web.reactive.function.client.WebClientResponseException
 import javax.persistence.NoResultException
 
@@ -61,7 +56,6 @@ class BestellungReadService(
         }
     }
 
-
     /**
      * Eine Bestellung anhand der ID suchen.
      * @param id Die Id der gesuchten Bestellung.
@@ -84,7 +78,6 @@ class BestellungReadService(
         }
     }
 
-
     /**
      * Bestellungen zur Kunde-ID suchen.
      * @param kundeId Die Id des gegebenen Kunden.
@@ -100,7 +93,8 @@ class BestellungReadService(
         }.awaitSuspending().onEach { bestellung ->
             logger.debug("findByKundeId: {}", bestellung)
             bestellung.kundeNachname = nachname
-            logger.debug("findByKundeId: kundeNachname={}", bestellung.kundeNachname) }
+            logger.debug("findByKundeId: kundeNachname={}", bestellung.kundeNachname)
+        }
     } catch (e: NoResultException) {
         logger.debug("Keine Bestellung mit der KundenId '{}'", kundeId)
         null
