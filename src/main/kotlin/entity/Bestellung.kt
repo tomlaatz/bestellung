@@ -46,9 +46,6 @@ import javax.persistence.Version
  * @property bestellpositionen Liste von [Bestellposition]
  */
 
-
-
-
 @Entity
 @Table(name = "bestellung")
 @NamedQuery(
@@ -129,13 +126,11 @@ data class Bestellung(
         const val BY_KUNDEID = "${PREFIX}byKundeId"
 
         /**
-        * Parametername für die KundenId
-        */
+         * Parametername für die KundenId
+         */
         const val PARAM_KUNDEID = "kundeId"
-
-        }
-
     }
+}
 
 /**
  * Datentyp für die IDs von Bestellung-Objekten

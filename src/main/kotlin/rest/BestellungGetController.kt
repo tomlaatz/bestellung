@@ -16,13 +16,11 @@
  */
 package com.acme.bestellung.rest
 
-import am.ik.yavi.core.ConstraintViolation
 import com.acme.bestellung.entity.Bestellung
 import com.acme.bestellung.entity.BestellungId
 import com.acme.bestellung.entity.KundeId
 import com.acme.bestellung.rest.BestellungGetController.Companion.API_PATH
 import com.acme.bestellung.service.BestellungReadService
-import com.acme.bestellung.service.CreateResult
 import com.acme.bestellung.service.FindByIdResult
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -35,23 +33,17 @@ import org.springframework.hateoas.LinkRelation
 import org.springframework.hateoas.MediaTypes.HAL_JSON_VALUE
 import org.springframework.http.HttpStatus.NOT_ACCEPTABLE
 import org.springframework.http.HttpStatus.NOT_MODIFIED
-import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
-import org.springframework.http.ResponseEntity.created
 import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.http.ResponseEntity.status
-import org.springframework.http.ResponseEntity.unprocessableEntity
 import org.springframework.http.server.reactive.ServerHttpRequest
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.net.URI
 
 /**
  * Eine `@RestController`-Klasse bildet die REST-Schnittstelle, wobei die HTTP-Methoden, Pfade und MIME-Typen auf die

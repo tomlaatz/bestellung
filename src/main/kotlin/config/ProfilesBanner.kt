@@ -73,7 +73,8 @@ object ProfilesBanner {
             |Kubernetes           $kubernetes
             |Username             $username
             |JVM Locale           ${Locale.getDefault()}
-            |"""
+            |
+            """
                 .trimMargin("|"),
         )
     }
