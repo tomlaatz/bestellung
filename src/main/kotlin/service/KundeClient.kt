@@ -74,7 +74,7 @@ class KundeClient(
         // https://github.com/istio/istio/blob/master/samples/bookinfo/src/reviews/reviews-application/src/main/java/application/rest/LibertyRestEndpoint.java#L43
         val kundeHost = System.getenv("KUNDE_SERVICE_HOST") ?: "localhost"
         val kundePort = System.getenv("KUNDE_SERVICE_PORT") ?: "8080"
-        val baseUrl = "http://$kundeHost:$kundePort"
+        val baseUrl = "https://$kundeHost:$kundePort"
 
         const val username = "admin"
         const val password = "p"

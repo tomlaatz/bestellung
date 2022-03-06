@@ -95,7 +95,7 @@ class BestellungReadService(
 
         factory.withSession { session ->
             session.createNamedQuery<Bestellung>(Bestellung.BY_KUNDEID)
-                .setParameter(Bestellung.PARAM_KUNDEID, kundeId.toString())
+                .setParameter(Bestellung.PARAM_KUNDEID, kundeId)
                 .resultList
         }.awaitSuspending().onEach { bestellung ->
             logger.debug("findByKundeId: {}", bestellung)
