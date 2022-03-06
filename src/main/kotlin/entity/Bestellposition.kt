@@ -52,9 +52,7 @@ data class Bestellposition(
 
     val einzelpreis: BigDecimal = BigDecimal("0"),
 
-    val anzahl: Int = 1,
-
-    val idx: Int = 0
+    val anzahl: Int = 1
 )
 
 /**

@@ -75,6 +75,7 @@ data class Bestellung(
         fetch = FetchType.EAGER,
     )
     @JoinColumn(name = "bestellung_fk", nullable = false)
+    @OrderColumn(name = "idx", nullable = false)
     var bestellpositionen: MutableList<Bestellposition>,
 
     /*
