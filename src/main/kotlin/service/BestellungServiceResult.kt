@@ -32,6 +32,7 @@ sealed interface FindByIdResult {
 
     /**
      * Resultat-Typ, wenn keine Bestellung gefunden wurde.
+     * @property id Die BestellungsId.
      */
     data class NotFound(val id: BestellungId) : FindByIdResult
 }
