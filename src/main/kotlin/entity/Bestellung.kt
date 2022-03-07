@@ -75,12 +75,6 @@ data class Bestellung(
     @OrderColumn(name = "idx", nullable = false)
     var bestellpositionen: MutableList<Bestellposition>,
 
-    /*
-    @JoinColumn(name = "bestellung_fk", nullable = false)
-    @OrderColumn(name = "idx")
-    var bestellpositionen: List<Bestellposition>,
-     */
-
     @CreationTimestamp
     @Suppress("UnusedPrivateMember")
     private val erzeugt: LocalDateTime = now(),

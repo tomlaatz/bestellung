@@ -13,19 +13,9 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
--- docker compose exec postgres bash
--- psql --dbname=kunde --username=kunde --file=/scripts/create.sql
-
--- https://www.postgresql.org/docs/devel/app-psql.html
--- https://www.postgresql.org/docs/current/ddl-schemas.html
--- https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-CREATE
--- "user-private schema" (Default-Schema: public)
 CREATE SCHEMA IF NOT EXISTS AUTHORIZATION bestellung;
 
 ALTER ROLE bestellung SET search_path = 'bestellung';
-
--- https://www.postgresql.org/docs/current/sql-createtable.html
--- https://www.postgresql.org/docs/current/datatype.html
 
 CREATE TABLE IF NOT EXISTS bestellung (
   id            uuid PRIMARY KEY,
@@ -44,5 +34,3 @@ CREATE TABLE IF NOT EXISTS bestellposition (
   anzahl          integer NOT NULL,
   idx             integer NOT NULL DEFAULT 0
   );
-
-CREATE INDEX IF NOT EXISTS idx_idx ON bestellposition (idx ASC);

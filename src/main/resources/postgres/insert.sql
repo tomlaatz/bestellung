@@ -14,7 +14,7 @@
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -- docker compose exec postgres bash
--- psql --dbname=kunde --username=kunde --file=/scripts/insert.sql
+-- psql --dbname=bestellung --username=bestellung --file=/scripts/insert.sql
 
 -- https://www.postgresql.org/docs/current/app-psql.html
 

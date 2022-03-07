@@ -32,7 +32,7 @@ import javax.persistence.Table
  * @property id ID der Bestellposition
  * @property artikelId ID der bestellten Artikels.
  * @property einzelpreis Einzelpreis.
- * @property anzahl Anzahl des bestellten Artikels.a
+ * @property anzahl Anzahl des bestellten Artikels.
  */
 @Entity
 @Table(name = "bestellposition")
